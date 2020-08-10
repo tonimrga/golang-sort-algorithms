@@ -15,6 +15,7 @@ func main() {
 	fmt.Println("-----------------------------")
 	fmt.Println("------- Array created -------")
 	fmt.Println("------ Sorting started ------")
+	bubbleSort(array)
 	selectionSort(array)
 }
 
@@ -33,6 +34,24 @@ func shuffleArray(array []int) []int {
 	return array
 }
 
+func bubbleSort(array []int) {
+	var sortedArray []int = array
+	var length = len(sortedArray)
+	var startTime = time.Now()
+	for i := 0; i < length-1; i++ {
+		for j := 0; j < length-i-1; j++ {
+			if sortedArray[j] > sortedArray[j+1] {
+				sortedArray[j], sortedArray[j+1] = sortedArray[j+1], sortedArray[j]
+			}
+		}
+	}
+	var elapsed = time.Since(startTime)
+	fmt.Println("-----------------------------")
+	fmt.Println("Bubble sort")
+	fmt.Println("Time elapsed:", elapsed.Milliseconds(), "ms")
+	fmt.Println("-----------------------------")
+}
+
 func selectionSort(array []int) {
 	var sortedArray []int = array
 	var length = len(sortedArray)
@@ -49,6 +68,6 @@ func selectionSort(array []int) {
 	var elapsed = time.Since(startTime)
 	fmt.Println("-----------------------------")
 	fmt.Println("Selection sort")
-	fmt.Println("Time elapsed:", elapsed.Nanoseconds(), "ns")
+	fmt.Println("Time elapsed:", elapsed.Milliseconds(), "ms")
 	fmt.Println("-----------------------------")
 }
