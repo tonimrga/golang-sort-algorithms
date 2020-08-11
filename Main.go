@@ -15,8 +15,14 @@ func main() {
 	fmt.Println("-----------------------------")
 	fmt.Println("------- Array created -------")
 	fmt.Println("------ Sorting started ------")
+	fmt.Println("-----------------------------")
 	bubbleSort(array)
+	insertionSort(array)
 	selectionSort(array)
+	fmt.Println("-----------------------------")
+	fmt.Println("------- Sorting ended -------")
+	fmt.Println("-----------------------------")
+
 }
 
 func createArray(numOfElements int) []int {
@@ -46,10 +52,7 @@ func bubbleSort(array []int) {
 		}
 	}
 	var elapsed = time.Since(startTime)
-	fmt.Println("-----------------------------")
-	fmt.Println("Bubble sort")
-	fmt.Println("Time elapsed:", elapsed.Milliseconds(), "ms")
-	fmt.Println("-----------------------------")
+	fmt.Println("Bubble sort: ", elapsed.Nanoseconds(), "ns")
 }
 
 func selectionSort(array []int) {
@@ -66,8 +69,22 @@ func selectionSort(array []int) {
 		sortedArray[i], sortedArray[min] = sortedArray[min], sortedArray[i]
 	}
 	var elapsed = time.Since(startTime)
-	fmt.Println("-----------------------------")
-	fmt.Println("Selection sort")
-	fmt.Println("Time elapsed:", elapsed.Milliseconds(), "ms")
-	fmt.Println("-----------------------------")
+	fmt.Println("Selection sort: ", elapsed.Nanoseconds(), "ns")
+}
+
+func insertionSort(array []int) {
+	var sortedArray []int = array
+	var length = len(sortedArray)
+	var startTime = time.Now()
+	for i := 1; i < length; i++ {
+		var key int = sortedArray[i]
+		var j int = i - 1
+		for j >= 0 && sortedArray[j] > key {
+			sortedArray[j+1] = sortedArray[j]
+			j--
+		}
+		sortedArray[j+1] = key
+	}
+	var elapsed = time.Since(startTime)
+	fmt.Println("Insertion sort: ", elapsed.Nanoseconds(), "ns")
 }
