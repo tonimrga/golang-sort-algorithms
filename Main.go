@@ -7,27 +7,29 @@ import (
 )
 
 func main() {
-	var numOfElements int
+	var size int
 	fmt.Println("Enter number of elements in array: ")
-	fmt.Scanln(&numOfElements)
+	fmt.Scanln(&size)
 
-	var array []int = createArray(numOfElements)
-	fmt.Println("-----------------------------")
+	var array []int = createArray(size)
+	fmt.Println("-----------------git ------------")
 	fmt.Println("------- Array created -------")
 	fmt.Println("------ Sorting started ------")
 	fmt.Println("-----------------------------")
+
 	bubbleSort(array)
 	insertionSort(array)
 	selectionSort(array)
+
 	fmt.Println("-----------------------------")
 	fmt.Println("------- Sorting ended -------")
 	fmt.Println("-----------------------------")
 
 }
 
-func createArray(numOfElements int) []int {
-	var array = make([]int, numOfElements)
-	for i := 0; i < numOfElements; i++ {
+func createArray(size int) []int {
+	var array = make([]int, size)
+	for i := 0; i < size; i++ {
 		array = append(array[:i], i+1)
 	}
 	var shuffledArray = shuffleArray(array)
@@ -41,8 +43,9 @@ func shuffleArray(array []int) []int {
 }
 
 func bubbleSort(array []int) {
+	fmt.Println("Bubble sort starting")
 	var sortedArray []int = array
-	var length = len(sortedArray)
+	var length int = len(sortedArray)
 	var startTime = time.Now()
 	for i := 0; i < length-1; i++ {
 		for j := 0; j < length-i-1; j++ {
@@ -51,30 +54,14 @@ func bubbleSort(array []int) {
 			}
 		}
 	}
-	var elapsed = time.Since(startTime)
-	fmt.Println("Bubble sort: ", elapsed.Nanoseconds(), "ns")
-}
-
-func selectionSort(array []int) {
-	var sortedArray []int = array
-	var length = len(sortedArray)
-	var startTime = time.Now()
-	for i := 0; i < length-1; i++ {
-		var min int = i
-		for j := i + 1; j < length; j++ {
-			if sortedArray[j] < sortedArray[min] {
-				min = j
-			}
-		}
-		sortedArray[i], sortedArray[min] = sortedArray[min], sortedArray[i]
-	}
-	var elapsed = time.Since(startTime)
-	fmt.Println("Selection sort: ", elapsed.Nanoseconds(), "ns")
+	var elapsed = time.Since(startTime).Nanoseconds()
+	fmt.Printf("Bubble sort: %.3f ns\n", float64(elapsed))
 }
 
 func insertionSort(array []int) {
+	fmt.Println("Insertion sort starting")
 	var sortedArray []int = array
-	var length = len(sortedArray)
+	var length int = len(sortedArray)
 	var startTime = time.Now()
 	for i := 1; i < length; i++ {
 		var key int = sortedArray[i]
@@ -85,6 +72,24 @@ func insertionSort(array []int) {
 		}
 		sortedArray[j+1] = key
 	}
-	var elapsed = time.Since(startTime)
-	fmt.Println("Insertion sort: ", elapsed.Nanoseconds(), "ns")
+	var elapsed = time.Since(startTime).Nanoseconds()
+	fmt.Printf("Insertion sort: %.3f ns\n", float64(elapsed))
+}
+
+func selectionSort(array []int) {
+	fmt.Println("Selection sort starting")
+	var sortedArray []int = array
+	var length int = len(sortedArray)
+	var startTime = time.Now()
+	for i := 0; i < length-1; i++ {
+		var min int = i
+		for j := i + 1; j < length; j++ {
+			if sortedArray[j] < sortedArray[min] {
+				min = j
+			}
+		}
+		sortedArray[i], sortedArray[min] = sortedArray[min], sortedArray[i]
+	}
+	var elapsed = time.Since(startTime).Nanoseconds()
+	fmt.Printf("Selection sort: %.3f ns\n", float64(elapsed))
 }
