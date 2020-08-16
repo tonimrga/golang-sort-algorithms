@@ -12,7 +12,6 @@ func main() {
 	fmt.Scanln(&size)
 
 	var array []int = createArray(size)
-	fmt.Println("-----------------git ------------")
 	fmt.Println("------- Array created -------")
 	fmt.Println("------ Sorting started ------")
 	fmt.Println("-----------------------------")
